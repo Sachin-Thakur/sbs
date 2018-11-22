@@ -1,0 +1,40 @@
+body, html {
+	width: 100%;
+	margin: auto;
+  /*background-color: #223260;*/
+	background-image: url(res/back.JPG);
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+.nav{
+	position: relative;
+	background-image: url("res/headerBack.png");
+	background-repeat: no-repeat;
+	background-position: top;
+	background-attachment: fixed;
+}
+ 
+.oneThird{
+	background-color: #fff;
+	min-width: 25%;
+	height: 250px;
+	display: inline-block;
+	margin-right: 6.25%;
+}
+
+.oneThirdLast{
+	background-color: #fff;
+	width: 25%;
+	height: 250px;
+	display: inline-block;
+}
+
+.contentContainer{
+	padding-top: 10%;
+	color: #fff;
+	min-width: 100%;
+	margin-left: 6.25%;
+	margin-right: 100%;
+}
