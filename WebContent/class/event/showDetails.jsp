@@ -4,12 +4,14 @@
 <%@page import="com.daniel.util.DbUtil"%>
 <%@ page import="com.daniel.util.DbUtil.*" %>
 <%
-Connection connection=DbUtil.getConnection();
+Connection con=DbUtil.getConnection();
 %>
 <% session.setAttribute("Wing", "CLASS"); %>
 	 <%!
 	 	java.sql.Statement selectClassEventsIdSTAT =null;
 	 	ResultSet selectClassEventsIdRSET=null;
+	 	int id=0,dept_id,i=0,hours;
+	 	int nofaculty;
 	 %>  
 
 <head>
@@ -37,6 +39,18 @@ Connection connection=DbUtil.getConnection();
 	{
 	font-family:'lilita one',cursive;
 	}
+	.label
+	{
+	font-size:1.25em;
+	color:white;
+	font-weight:lighter;
+	float:left;
+	padding-top:6%;
+	}
+	input[type="text"]
+	{
+	float:right;
+	}
 	</style>	
 	<body style="background-image: url(../res/otherback.jpg); background-size: cover;">
 		
@@ -63,21 +77,82 @@ Connection connection=DbUtil.getConnection();
 			</div>
 
 		</nav>
+		<%
+		selectClassEventsIdSTAT=con.createStatement();
+		selectClassEventsIdRSET=selectClassEventsIdSTAT.executeQuery("select id from class_events");
+		while(selectClassEventsIdRSET.next())
+		{
+			id=selectClassEventsIdRSET.getInt("id");
+		}
+		selectClassEventsIdSTAT=con.createStatement();
+		selectClassEventsIdRSET=selectClassEventsIdSTAT.executeQuery("select * from class_events where id='"+id+"'");
+		while(selectClassEventsIdRSET.next())
+		{
+		%>
 		<div class="container" style="text-align: center;">
-			<div class="panel panel-default" style="font-family:'lilita one',cursive;background-color: rgba(155, 155, 155, .25); border: 0px; padding: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; border-top-right-radius: 15px; border-top-left-radius: 15px; margin-right: auto; margin-left: auto;">
+			<div class="panel panel-header" style="	font-family:'Lilita One', cursive;margin-left:50%;transform:translate(-50%,0%);margin-bottom: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 15px; border-top-left-radius: 15px; background-color: #223260; color: #cc982d; padding: 15px;min-width:70%">
+			<strong>You Just Booked A Session With Caps!!
+			<br>The details Entered By You Are<br></strong>
+			</div>
+			<div class="panel panel-default" style="font-family:'lilita one',cursive;background-color: rgba(55, 55, 55, .80); border: 0px; padding: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; margin-right: auto; margin-left: auto;max-width:70%">
+			<form  class="form-inline" style="margin-left: auto; margin-right: auto; text-align: center;" autocomplete="off">
 			
-			You Just Booked A Session With Caps!!
-			<br>The details Entered By You Are:-
-			
-			<%
-			selectClassEventsIdSTAT = connection.createStatement();
-			
-			selectClassEventsIdRSET = selectClassEventsIdSTAT.executeQuery("select topic_name,start_time,end_time,event_date,venue,booker_name,booker_email,booker_phone,class_representative_name,class_representative_email,class_representative_phone,class_email from class_events where id = "+request.getParameter("id"));
-			selectClassEventsIdRSET.next();
-			
-		
+			<div class="form-group" style="margin-left: auto; margin-right: auto; border-bottom-color: #cc982d; border-bottom: 2px;">
+			<div class="label">Class</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;" value="<%=selectClassEventsIdRSET.getString("class_name")%>" disabled>
+			<br>
+			<div class="label">Number Of Participants</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;"value="<%=selectClassEventsIdRSET.getString("max_participants")%>" disabled>
+			<br>
+			<div class="label">Class Representative Name</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;"value="<%=selectClassEventsIdRSET.getString("class_representative_name") %>" disabled>
+			<br>
+			<div class="label">Class Representative Phone</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;"value="<%=selectClassEventsIdRSET.getString("class_representative_phone")%>" disabled>
+			<br>
+			<div class="label">Class Representative Email</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;"value="<%=selectClassEventsIdRSET.getString("class_representative_email")%>" disabled>
+			<br>
+			<div class="label">Class Email Address</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;"value="<%=selectClassEventsIdRSET.getString("class_email")%>" disabled>
+			<br>
+			<% 
+			dept_id=selectClassEventsIdRSET.getInt("dept_id");
+			}
 			%>
-		
+			<% 
+			selectClassEventsIdSTAT=con.createStatement();
+			selectClassEventsIdRSET=selectClassEventsIdSTAT.executeQuery("select dept from department where dept_id='"+dept_id+"'");
+			while(selectClassEventsIdRSET.next())
+			{
+		%>
+			<br>
+			<div class="label">Department</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;"value="<%=selectClassEventsIdRSET.getString("dept") %>" disabled>
+			<br>
+			<%} %>
+			<%		
+			int j=1;
+			selectClassEventsIdSTAT=con.createStatement();
+			selectClassEventsIdRSET=selectClassEventsIdSTAT.executeQuery("select * from  classwing_class_incharge where class_events_id='"+id+"'");
+			while(selectClassEventsIdRSET.next()) 
+			{
+			%>
+			<br>
+			<div class="label">Class Incharge Name (<%=j %>)</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;"value="<%=selectClassEventsIdRSET.getString("incharge_name") %>" disabled>
+			<br>
+			<div class="label">Class Incharge Phone (<%=j %>)</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;"value="<%=selectClassEventsIdRSET.getString("incharge_email") %>" disabled>
+			<br>
+			<div class="label">Class Incharge Email (<%=j %>)</div>
+			<input type="text" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;"value="<%=selectClassEventsIdRSET.getString("incharge_phone") %>" disabled>
+			<br>
+			<%j++;
+			}%>
+			</div>
+			</form>
+			<span style="color:white;font-size:1em;font-weight:light">*Contact CAPS office to change the input details.</span>
 			
 	</div>
 		</div>
