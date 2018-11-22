@@ -20,6 +20,7 @@
   <description>
      My Website
   </description>
+<<<<<<< HEAD
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>Login</servlet-class>
@@ -28,5 +29,15 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+=======
+  <servlet-mapping>
+  <servlet-name>Login</servlet-name>
+  <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>Login</servlet-name>
+  <servlet-class>Login</servlet-class>
+  </servlet>
+>>>>>>> branch 'master' of https://github.com/Sachin-Thakur/sbs.git
   
 </web-app>

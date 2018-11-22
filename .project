@@ -3,12 +3,17 @@
 	<name>sbs</name>
 	<comment></comment>
 	<projects>
+<<<<<<< HEAD
 		<project>commons-fileupload-1.2</project>
 		<project>commons-io-2.4</project>
 		<project>mysql-connector-java-5.0.8-bin</project>
 		<project>activation-1.1.1</project>
 		<project>javax.mail-1.6.0</project>
 		<project>mail-1.4.1</project>
+=======
+		<project>mysql-connector-java-5.0.8-bin</project>
+		<project>javax.mail-1.6.0</project>
+>>>>>>> branch 'master' of https://github.com/Sachin-Thakur/sbs.git
 	</projects>
 	<buildSpec>
 		<buildCommand>

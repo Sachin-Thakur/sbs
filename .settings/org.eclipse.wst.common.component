@@ -3,6 +3,7 @@
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
         <wb-resource deploy-path="/WEB-INF/classes/" source-path="/ImportedClasses"/>
+<<<<<<< HEAD
         <dependent-module archiveName="commons-fileupload-1.2.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/commons-fileupload-1.2/commons-fileupload-1.2">
             <dependency-type>uses</dependency-type>
         </dependent-module>
@@ -19,6 +20,12 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="mail-1.4.1.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/mail-1.4.1/mail-1.4.1">
+=======
+        <dependent-module archiveName="mysql-connector-java-5.0.8-bin.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/mysql-connector-java-5.0.8-bin/mysql-connector-java-5.0.8-bin">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="javax.mail-1.6.0.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/javax.mail-1.6.0/javax.mail-1.6.0">
+>>>>>>> branch 'master' of https://github.com/Sachin-Thakur/sbs.git
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="context-root" value="sbs"/>

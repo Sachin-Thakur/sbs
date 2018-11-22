@@ -53,7 +53,11 @@
 					
 					<ul class="nav navbar-nav navbar-right" style="color:white">
 						<%
+<<<<<<< HEAD
 						out.println("   <li class=\"navbar-inverse navbar-text\">Welcome " + session.getAttribute("STUDENT_NAME") + "</li>   ");
+=======
+						out.println("   <li class=\"navbar-inverse navbar-text\">Welcome " + session.getAttribute("USER_NAME") + "</li>   ");
+>>>>>>> branch 'master' of https://github.com/Sachin-Thakur/sbs.git
 						%>
 						<li><a href="/sbs/logout.jsp" style="color:white">Log Out</a></li>
 					</ul>

@@ -96,7 +96,10 @@
 				<br>
 
 				<button type="submit" class="btn" form="changeQuota" style="border-radius:100px;background-color: #1668ce; color: white; margin-right: 15px; margin-bottom: 15px;">Change Department Quotas</button>
+<<<<<<< HEAD
 				<button type="submit" class="btn" form="changeQuota" style="border-radius:100px;background-color: #1668ce; color: white; margin-right: 15px; margin-bottom: 15px;"></button>
+=======
+>>>>>>> branch 'master' of https://github.com/Sachin-Thakur/sbs.git
 				
 			
 				
