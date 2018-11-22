@@ -12,6 +12,7 @@ int snum=0,login_flag=0;
   <%! 
      java.sql.Statement getClassEventsSTAT =null;
      ResultSet getClassEventsRSET,detailsfetchRSET =null;
+     String adminlevel;
  %>
 	<%
 	if(request.getParameterMap().containsKey("emplreg"))
@@ -39,7 +40,7 @@ int snum=0,login_flag=0;
 		}
 	}
 	
-	else if(request.getParameterMap().containsKey("email-login"))
+	/*else if(request.getParameterMap().containsKey("email-login"))
 		{
 		try
 		{
@@ -89,8 +90,9 @@ int snum=0,login_flag=0;
 			System.out.println(e);
 		}
 		}
-	
-	else if(request.getParameterMap().containsKey("EMP_ID")){
+	*/
+	else 
+		if(request.getParameterMap().containsKey("EMP_ID")){
 		session.setAttribute("USER", "FACULTY");
 		session = request.getSession();
 		session.setAttribute("REGISTER_NUMBER", request.getParameter("EMP_ID"));
@@ -106,58 +108,95 @@ int snum=0,login_flag=0;
 	}
 	else if(request.getParameterMap().containsKey("ADMIN_ID")){
 		session.setAttribute("USER", "ADMIN");
-		if(request.getParameter("ROLE").equals("SUPER ADMIN"))
+		try
+		{
+		getClassEventsSTAT = con.createStatement();
+		getClassEventsRSET=getClassEventsSTAT.executeQuery("select privilege,email from admin_list");
+		String login_email=request.getParameter("email-login");
+		while(getClassEventsRSET.next())
+		{
+			String dbemail=getClassEventsRSET.getString("email"),
+					passwd=request.getParameter("password-login"),
+					password_checker;
+					if(login_email.equals(dbemail))
+					{
+						login_flag++;
+						getClassEventsSTAT = con.createStatement();
+						detailsfetchRSET=getClassEventsSTAT.executeQuery("select password,privilege from admin_list where email ='"+login_email+"'");
+						while(detailsfetchRSET.next())
+						{
+						password_checker=detailsfetchRSET.getString("password");
+						if(password_checker.equals(passwd))
+						{
+							adminlevel=detailsfetchRSET.getString("privilege");
+						}
+						else
+						{
+							System.out.println("Wrong password");
+						}
+						}
+					}
+		}
+		if(login_flag==0)
+		{
+			System.out.println("User not registered");
+		}
+		}catch(Exception e)
+		{
+			System.out.println(e);
+		}
+		}
+		if(adminlevel.equals("super_admin"))
 		{
 		
 		session = request.getSession();
 		session.setAttribute("REGISTER_NUMBER", request.getParameter("ADMIN_ID"));
-		session.setAttribute("USER_NAME", request.getParameter("USER_NAME"));
-		session.setAttribute("ROLE", request.getParameter("ROLE"));
-		session.setAttribute("EMAIL_ID", request.getParameter("EMAIL_ID"));
+		session.setAttribute("USER_NAME", "SUPER ADMIN");
+		session.setAttribute("ROLE", "SUPER ADMIN");
+		session.setAttribute("EMAIL_ID", request.getParameter("login_email"));
 		session.setAttribute("USER_CATEGORY", "SUPER ADMIN");
 		}
-		if(request.getParameter("ROLE").equals("CLASS ADMIN"))
+		if(adminlevel.equals("admin_class"))
 		{
 		
 		session = request.getSession();
 		session.setAttribute("REGISTER_NUMBER", request.getParameter("ADMIN_ID"));
-		session.setAttribute("USER_NAME", request.getParameter("USER_NAME"));
-		session.setAttribute("ROLE", request.getParameter("ROLE"));
-		session.setAttribute("EMAIL_ID", request.getParameter("EMAIL_ID"));
+		session.setAttribute("USER_NAME", "CLASS ADMIN");
+		session.setAttribute("ROLE", "CLASS ADMIN");
+		session.setAttribute("EMAIL_ID", request.getParameter("login_email"));
 		session.setAttribute("USER_CATEGORY", "CLASS ADMIN");
 		}
-		if(request.getParameter("ROLE").equals("CEWS ADMIN"))
+		if(adminlevel.equals("admin_cews"))
 		{
 		
 		session = request.getSession();
 		session.setAttribute("REGISTER_NUMBER", request.getParameter("ADMIN_ID"));
-		session.setAttribute("USER_NAME", request.getParameter("USER_NAME"));
-		session.setAttribute("ROLE", request.getParameter("ROLE"));
-		session.setAttribute("EMAIL_ID", request.getParameter("EMAIL_ID"));
+		session.setAttribute("USER_NAME", "CEWS ADMIN");
+		session.setAttribute("ROLE", "CEWS ADMIN");
+		session.setAttribute("EMAIL_ID", request.getParameter("login_email"));
 		session.setAttribute("USER_CATEGORY", "CEWS ADMIN");
 		}
-		if(request.getParameter("ROLE").equals("CHAL ADMIN"))
+		if(adminlevel.equals("admin_chal"))
 		{
 		
 		session = request.getSession();
 		session.setAttribute("REGISTER_NUMBER", request.getParameter("ADMIN_ID"));
-		session.setAttribute("USER_NAME", request.getParameter("USER_NAME"));
-		session.setAttribute("ROLE", request.getParameter("ROLE"));
-		session.setAttribute("EMAIL_ID", request.getParameter("EMAIL_ID"));
+		session.setAttribute("USER_NAME", "CHAl ADMIN");
+		session.setAttribute("ROLE", "CHAL ADMIN");
+		session.setAttribute("EMAIL_ID", request.getParameter("login_email"));
 		session.setAttribute("USER_CATEGORY", "CHAL ADMIN");
 		}
-		if(request.getParameter("ROLE").equals("CAW ADMIN"))
+		if(adminlevel.equals("admin_caw"))
 		{
 		
 		session = request.getSession();
 		session.setAttribute("REGISTER_NUMBER", request.getParameter("ADMIN_ID"));
-		session.setAttribute("USER_NAME", request.getParameter("USER_NAME"));
-		session.setAttribute("ROLE", request.getParameter("ROLE"));
-		session.setAttribute("EMAIL_ID", request.getParameter("EMAIL_ID"));
+		session.setAttribute("USER_NAME", "CAW ADMIN");
+		session.setAttribute("ROLE", "CAW ADMIN");
+		session.setAttribute("EMAIL_ID", request.getParameter("login_email"));
 		session.setAttribute("USER_CATEGORY", "CAW ADMIN");
 		}
-	}
-	else if((request.getParameterMap().containsKey("REG_NO")))
+	/* else if((request.getParameterMap().containsKey("REG_NO")))
 	{
 		session.setAttribute("USER", "STUDENT");
 		if(request.getParameter("ROLE").equals("STUDENT"))
@@ -187,8 +226,8 @@ int snum=0,login_flag=0;
 			response.sendRedirect("christLogin.jsp");
 			
 		}
-	} 
-%>
+	}
+ */%>
 
 	<head>
 		<!-- Latest compiled and minified CSS >

@@ -52,7 +52,7 @@ try
 			classRepresentativeEmail = "'" + request.getParameter("classRepEmail")+ "'";
 			classRepresentativePhone = request.getParameter("classRepPhone");
 			classEmail ="'" +  request.getParameter("classEmail")+ "'";
-			hours = Integer.parseInt(request.getParameter("hours"));
+			hours = Integer.parseInt(request.getParameter("noOfTeachers"));
 			dept_id = "'" +request.getParameter("dept")+ "'";
 			status="1";
 			bookedOn = "now()";
@@ -165,8 +165,7 @@ try
 	    				);  
 	      Transport.send(message);
 		 
- */		
-		%>
+ */		%>
 <%
 response.sendRedirect("/sbs/class/event/showDetails.jsp");
 }

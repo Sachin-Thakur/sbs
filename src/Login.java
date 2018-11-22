@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,9 +23,7 @@ public class Login extends HttpServlet {
 
 	private static Connection connection;
     
-   
-        
-    	
+
 
     	public Login() {
     	    		connection = DbUtil.getConnection();
@@ -47,21 +46,35 @@ public class Login extends HttpServlet {
 			out = response.getWriter(); 
 			String username = request.getParameter("email-login");
 			String password = request.getParameter("password-login");
-			loginSt= connection.createStatement();
+			loginSt = connection.createStatement();
 			loginRs = loginSt.executeQuery("select * from registeredusers where email='"+username+"' and password='"+password+"'");
 			if(loginRs.next())
 			{
-				//String id = loginRs.getString("sno");
+				String id = loginRs.getString("sno");
 				HttpSession session = request.getSession();
-			//	session.setAttribute("loginId", id);
+				
+			session.setAttribute("loginId", id);
+			
+
+			session.setAttribute("USER","FACULTY");
+			session = request.getSession();
+			session.setAttribute("USER_NAME",loginRs.getString("name") );
+			session.setAttribute("EMAIL_ID", request.getParameter("email-login"));
+			session.setAttribute("REGISTER_NUMBER",loginRs.getString("register"));
+			session.setAttribute("CONTACT_NUMBER",loginRs.getString("phone"));
+			session.setAttribute("CLASS_NAME",loginRs.getString("dept"));
+			session.setAttribute("TERM", "0");
+			session.setAttribute("ROLE","FACULTY");
+			session.setAttribute("USER_CATEGORY", "Faculty");
 				session.setMaxInactiveInterval(1800);
-			System.out.println("Able to fetch the record from data base ");
+			
 				response.sendRedirect("class/index.jsp");
 				
 				
 			}
 			else {
 				response.sendRedirect("christLogin.jsp?action=loginFailed");
+				System.out.println("NOT Able to fetch the record from data base ");
 				
 			}	
 		}

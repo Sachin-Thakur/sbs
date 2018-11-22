@@ -1,3 +1,5 @@
+<%@page import="java.util.*" %>
+<% %>
 <html><head>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -147,8 +149,7 @@
     #animatesnackbar
     {
     transition-timing-function:cubic-bezier(.4,0,1,1);
-    animation:slideUp 1s,opacity 0.2s ease-out;
-    transform:0.5s all;
+    animation:slideUp 3s,opacity 0.2s ease-out;
     animation-fill-mode:forwards;
     display:block;
     }
@@ -180,93 +181,43 @@
     opacity:0;
     }
     }
+    @media screen and (max-width:1024px)
+	{
+	.vl
+	{
+	display:none;
+	}
+	.login-signup
+	{
+	display:inline-block;
+	}
+	#signup>.row
+    {
+    padding-right:20%;
+    margin-left:15%;
+    margin-bottom:10%;
+    }
+    #signup
+    {
+    border-bottom:2px solid #323232;
+    }
+    #login>.row
+    {
+    padding: 10%;
+    margin-right: 7%;
+    margin-left: 7%;
+    }
+    #login
+    {
+     margin-top:10%;
+    }
+    .formimage
+    {
+    display:none;
+    }
+	}
     </style>
 <body>
-<br><br><br>
-<h2>Faculty Login</h2>
-<form id="loginForm2" action="index.jsp" method="post">
-	
-	<input type="text" name="EMP_ID" value="1641010">
-	<input type="text" name="USER_NAME" value="Abhishek Agarwal">
-	<input type="text" name="MOBILE_NO" value="9660440660">
-	<input type="text" name="EMAIL_ID" value="abhishek.agarwal@mca.christuniversity.in">
-	<input type="text" name="DEPARTMENT" value=1MCA">
-	<input type="hidden" name="ROLE" value="FACULTY">
-	
-	<input type="submit" value="Login">
-
-</form>
-<h2>Admin Login</h2>
-<form id="loginForm2" action="index.jsp" method="post">
-	
-	<input type="text" name="ADMIN_ID" value="1641010">
-	<input type="text" name="USER_NAME" value="Aniruddho Majumder">
-	<input type="text" name="ROLE" value="SUPER ADMIN">
-	<input type="text" name="EMAIL_ID" value="aniruddho1997@gmail.com">
-	<input type="submit" value="Login">
-
-</form>
-<h2>Class Login</h2>
-<form id="loginForm2" action="index.jsp" method="post">
-	
-	<input type="text" name="ADMIN_ID" value="1641010">
-	<input type="text" name="USER_NAME" value="Aniruddho Majumder">
-	<input type="text" name="ROLE" value="CLASS ADMIN">
-	<input type="text" name="EMAIL_ID" value="aniruddho1997@gmail.com">
-	<input type="submit" value="Login">
-
-</form>
-<h2>Chal Login</h2>
-<form id="loginForm2" action="index.jsp" method="post">
-	
-	<input type="text" name="ADMIN_ID" value="1641010">
-	<input type="text" name="USER_NAME" value="Aniruddho Majumder">
-	<input type="text" name="ROLE" value="CHAL ADMIN">
-	<input type="text" name="EMAIL_ID" value="aniruddho1997@gmail.com">
-	<input type="submit" value="Login">
-
-</form>
-<h2>Cews Login</h2>
-<form id="loginForm2" action="index.jsp" method="post">
-	
-	<input type="text" name="ADMIN_ID" value="1641010">
-	<input type="text" name="USER_NAME" value="Aniruddho Majumder">
-	<input type="text" name="ROLE" value="CEWS ADMIN">
-	<input type="text" name="EMAIL_ID" value="aniruddho1997@gmail.com">
-	<input type="submit" value="Login">
-
-</form>
-<h2> CAW Login</h2>
-<form id="loginForm2" action="index.jsp" method="post">
-	
-	<input type="text" name="ADMIN_ID" value="1641010">
-	<input type="text" name="USER_NAME" value="Aniruddho Majumder">
-	<input type="text" name="ROLE" value="CAW ADMIN">
-	<input type="text" name="EMAIL_ID" value="aniruddho1997@gmail.com">
-	<input type="submit" value="Login">
-
-</form>
-<h2>Commitee Login</h2>
-<form id="loginForm2" action="index.jsp" method="post">
-	
-	<input type="text" name="REG_NO" value="1641010">
-	<input type="text" name="USER_NAME" value="Aniruddho Majumder">
-	<input type="text" name="ROLE" value="COMMITEE ADMIN">
-	<input type="text" name="EMAIL_ID" value="aniruddho1997@gmail.com">
-	<input type="submit" value="Login">
-
-</form>
-
-<h2>Student Login</h2>
-<form id="loginForm2" action="index.jsp" method="post">
-	
-	<input type="text" name="REG_NO" value="1641010">
-	<input type="text" name="USER_NAME" value="Aniruddho Majumder">
-	<input type="text" name="ROLE" value="STUDENT">
-	<input type="text" name="EMAIL_ID" value="aniruddho1997@gmail.com">
-	<input type="submit" value="Login">
-
-</form>
 	<div class="login-signup">
 
 		<div class="vl">
@@ -348,7 +299,6 @@
     	</div>
     	</div>
     	</div>	
-
     		<div class="container" id="login">
     		<h2 class="text-center text-uppercase text-secondary mb-0" > Login </h2>
     		<hr class="star-dark mb-5">

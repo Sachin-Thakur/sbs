@@ -84,6 +84,67 @@ Connection connection=DbUtil.getConnection();
 	
 	</style>
 	<script>
+	$(document).ready(function()
+	{
+	$("#classEmail,#classRepEmail,#facultyInchargeEmail").blur(function()
+			{
+			$(".errorsnackbar").removeAttr("id","animatesnackbar");
+			if(document.activeElement !== this)
+			{
+			if($(this).val()!="")
+			{
+			var christemail=$(this).val();
+			var i=0;
+			var emailarray=[];
+			emailarray=christemail.split("@");
+			var length=emailarray.length;
+			var partchrist;
+			var flag=0;
+			while(i!=length)
+			{
+				partchrist=emailarray[i];
+				i++;
+			}
+			var splitemailchrist=[];
+			splitemailchrist=partchrist.split(".");
+			length=splitemailchrist.length;
+			var splitemailpartchrist;
+			i=0;
+			while(i!=length)
+			{
+			splitemailpartchrist=splitemailchrist[i];
+			splitemailpartchrist=splitemailpartchrist.toLowerCase();
+			if(splitemailpartchrist=="christuniversity")
+			{	
+				if(i+1>=length)
+				{
+					flag=0;
+					break;
+				}
+				else
+				splitemailpartchrist=splitemailchrist[i+1]
+				splitemailpartchrist=splitemailpartchrist.toLowerCase();
+				if(splitemailpartchrist=="in")
+				flag=1; 
+				break;
+			}
+			else
+				i++;
+			}
+				if(flag==1){
+				alert("right");
+				}
+			else
+				{
+				alert("wrong");
+				$(".errorsnackbar").html("Please only use your Christ Email Id!");
+				$(".errorsnackbar").attr("id","animatesnackbar");
+				$(this).val("");
+				}
+			}
+			}
+			});
+	});
 		function submit1()
 		{
 			var dept1;
@@ -247,11 +308,10 @@ Connection connection=DbUtil.getConnection();
 		
 		<div class="container" style="color: #fff">
 			<div class="panel panel-header" style="	font-family:'Lilita One', cursive;margin-bottom: 0px; border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; border-top-right-radius: 15px; border-top-left-radius: 15px; background-color: #223260; color: #cc982d; padding: 15px;">
-				<strong>Choose Session Date and Time</strong>
+				<strong>Enter Session Details</strong>
 			</div>
 			<div class="panel panel-default" style="background-color: rgba(55, 55, 55, .80); border: 0px; padding: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; border-top-right-radius: 0px; border-top-left-radius: 0px; text-align: center; overflow: auto;">
-					<form id="sessionForm" name="sessionForm" class="form-inline" action="bookingProcess.jsp" method="post" style="margin-left: auto; margin-right: auto; text-align: center;" autocomplete="off">
-
+					<form id="sessionForm" name="sessionForm" class="form-inline" action="bookingProcess.jsp" method="post">
 				 <div class="form-group" style="margin-left: auto; margin-right: auto; border-bottom-color: #cc982d; border-bottom: 2px;">
 
 						<input type="text" name="facultyName" id="facultyName"  value = "<%= session.getAttribute("USER_NAME") %>" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;" placeholder="Faculty In-Charge Name" oninput="allLetter('facultyName', 'sessionForm');"></input>
@@ -293,16 +353,16 @@ Connection connection=DbUtil.getConnection();
 					
 					<hr style="border-color: #cc982d; margin-top: 45px; margin-bottom: 45px;">
 				
-	<%int k  = 0; for(;hours > 0;hours -= 60,k++){ ;
+	<%int k  = 0; for(;hours > 0;hours -= 60,k++){ 
 	 %>
 	
 					<div class="form-group" style="margin-left: auto; margin-right: auto; margin-top: 15px; border-bottom-color: #cc982d; border-bottom: 2px;">
 					<%=(k+1)%>
-	 				<input type="text" name="facultyInchargeName<%=k%>" id="facultyInchargeName<%=k%>" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;" placeholder="Subject Teacher  Incharge Name" oninput="allLetter('facultyInchargeName<%=k%>', 'sessionForm');" required></input>
+	 				<input type="text" name="facultyInchargeName<%=k%>" id="facultyInchargeName" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;" placeholder="Subject Teacher  Incharge Name" oninput="allLetter('facultyInchargeName', 'sessionForm');" required></input>
 						<br><br>
-						<input type="text" name="facultyInchargePhone<%=k%>" id="facultyInchargePhone<%=k%>" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;" placeholder="Subject Teacher Incharge Phone Number" oninput="allNumeric('facultyInchargePhone<%=k%>', 'sessionForm');" required></input>
+						<input type="text" name="facultyInchargePhone<%=k%>" id="facultyInchargePhone" class="form-control" style="margin-top: 15px; margin-right: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;" placeholder="Subject Teacher Incharge Phone Number" oninput="allNumeric('facultyInchargePhone', 'sessionForm');" required></input>
 						<br><br>
-						<input type="text" name="facultyInchargeEmail<%=k%>" id="facultyInchargeEmail<%=k%>" class="form-control" style="margin-top: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;" placeholder="Subject Teacher Incharge Email" oninput="emailVal('facultyInchargeEmail<%=k%>', 'sessionForm');" required></input>
+						<input type="text" name="facultyInchargeEmail<%=k%>" id="facultyInchargeEmail" class="form-control" style="margin-top: 15px; background-color: rgba(0, 0, 0, 0); color: #fff;" placeholder="Subject Teacher Incharge Email" oninput="emailVal('facultyInchargeEmail', 'sessionForm');" required></input>
 						<br><br>
 							
 					</div>
@@ -317,12 +377,13 @@ Connection connection=DbUtil.getConnection();
 					</div>
 
 					<input type="hidden" id="eventDate" name="eventDate" value = "<%=eventDate %>">
+					<input type="hidden" id="noOfTeachers" name="noOfTeachers" value="<%=k%>">
 					<input type="hidden" id="startTime" name="startTime" value = "<%=startTime %>">
 					<input type="hidden" id="endTime" name="endTime" value = "<%=endTime %>">
 					<input type="hidden" id="topicId" name="topicId" value =" <%= getTopicDataRSET.getString(1) %>" >
 					<input type="hidden" id="topicName" name="topicName" value =" <%= getTopicDataRSET.getString(2) %>" >
 					<input type="hidden" id="topicDesc" name="topicDesc" value =" <%= getTopicDataRSET.getString(3) %>" >
-					<input type = "hidden" id = "hours" name="hours" value= "<%=k %>">  
+					 
 					<% } %>  
 					</div>
 					
