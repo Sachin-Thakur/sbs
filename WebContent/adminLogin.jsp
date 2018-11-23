@@ -69,7 +69,7 @@
     		<div class="col-md-8-px-5 mx-auto">
     		<img class="col-mx-5-px-1  formimage" src="res/defaultform.jpg">
     		</div>
-    		<form  id="control-group" name="login" action="index.jsp" method="POST">
+    		<form  id="control-group" name="login" action="AdminLogin" method="POST">
     		<div class="control-group">
     		<div class="form-group floating-label-form controls mb-0 pb-3">
     		<label>Email Address:</label>
