@@ -21,12 +21,20 @@
      My Website
   </description>
   <servlet-mapping>
-  <servlet-name>Login</servlet-name>
-  <url-pattern>/Login</url-pattern>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>Login</servlet-name>
-  <servlet-class>Login</servlet-class>
+    <servlet-class>Login</servlet-class>
   </servlet>
   
+   <servlet-mapping>
+    <servlet-name>AdminLogin</servlet-name>
+    <url-pattern>/AdminLogin</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AdminLogin</servlet-name>
+    <servlet-class>AdminLogin</servlet-class>
+  </servlet>
 </web-app>
